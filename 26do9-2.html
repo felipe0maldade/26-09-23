@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo do Stop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        #cronometro {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo do Stop</h1>
+    <p>Clique no botão abaixo para sortear uma letra:</p>
+    <button onclick="sortearLetra()">Sortear Letra</button>
+    <p id="letraSorteada"></p>
+    
+    <h2>Categorias</h2>
+    <p>CEP: <input type="text" id="cepInput" disabled></p>
+    <p>NOME: <input type="text" id="nomeInput" disabled></p>
+    <p>COMIDA: <input type="text" id="comidaInput" disabled></p>
+    <p>COR: <input type="text" id="corInput" disabled></p>
+    <p>ANIMAL: <input type="text" id="animalInput" disabled></p>
+
+    <div id="cronometro">Tempo restante: 60 segundos</div>
+
+    <button id="stopButton" onclick="pararJogo()">Stop</button>
+
+    <script>
+        let tempoRestante = 60;
+        let cronometro;
+
+        function atualizarCronometro() {
+            document.getElementById("cronometro").textContent = `Tempo restante: ${tempoRestante} segundos`;
+
+            if (tempoRestante === 0) {
+                clearInterval(cronometro);
+                desabilitarInputs();
+                alert("Fim do jogo!");
+            } else {
+                tempoRestante--;
+            }
+        }
+
+        function sortearLetra() {
+            if (cronometro) {
+                return; // Evitar sorteio durante o jogo
+            }
+
+            const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const letraSorteada = letras[Math.floor(Math.random() * letras.length)];
+
+            document.getElementById("letraSorteada").textContent = `Letra Sorteada: ${letraSorteada}`;
+
+            habilitarInputs();
+            iniciarCronometro();
+        }
+
+        function habilitarInputs() {
+            document.getElementById("cepInput").disabled = false;
+            document.getElementById("nomeInput").disabled = false;
+            document.getElementById("comidaInput").disabled = false;
+            document.getElementById("corInput").disabled = false;
+            document.getElementById("animalInput").disabled = false;
+        }
+
+        function desabilitarInputs() {
+            document.getElementById("cepInput").disabled = true;
+            document.getElementById("nomeInput").disabled = true;
+            document.getElementById("comidaInput").disabled = true;
+            document.getElementById("corInput").disabled = true;
+            document.getElementById("animalInput").disabled = true;
+        }
+
+        function iniciarCronometro() {
+            tempoRestante = 60;
+            cronometro = setInterval(atualizarCronometro, 1000);
+        }
+
+        function pararJogo() {
+            clearInterval(cronometro);
+            desabilitarInputs();
+            alert("HAHAHAHA STOP");
+        }
+    </script>
+</body>
+</html>

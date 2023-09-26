@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorteio de Letra para o Stop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 100px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorteio de Letra para o Stop</h1>
+    <p>Clique no botão abaixo para sortear uma letra:</p>
+    <button onclick="sortearLetra()">Sortear Letra</button>
+    <p id="letraSorteada"></p>
+
+    <script>
+        function sortearLetra() {
+            const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const letraSorteada = letras[Math.floor(Math.random() * letras.length)];
+
+            document.getElementById("letraSorteada").textContent = `Letra Sorteada: ${letraSorteada}`;
+        }
+    </script>
+</body>
+</html>
